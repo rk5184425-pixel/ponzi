@@ -1,7 +1,7 @@
-import PonziEducation from "@/components/PonziEducation";
+import PonziSimulation from "@/components/PonziSimulation";
 
 const Index = () => {
-  return <PonziEducation />;
+  return <PonziSimulation />;
 };
 
 export default Index;
