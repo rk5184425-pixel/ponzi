@@ -109,11 +109,29 @@ const InvestorTreeChart = ({ investors, isCollapsed }: InvestorTreeChartProps) =
     });
   };
 
-  // Reset view
+  // Reset view and auto-fit
   const resetView = () => {
     setZoom(1);
     setPanX(0);
     setPanY(0);
+  };
+
+  // Auto-fit to screen
+  const autoFit = () => {
+    if (!containerRef.current || !allNodes.length) return;
+    
+    const containerWidth = containerRef.current.clientWidth;
+    const containerHeight = containerRef.current.clientHeight;
+    const contentWidth = viewBoxWidth;
+    const contentHeight = viewBoxHeight;
+    
+    const scaleX = (containerWidth * 0.9) / contentWidth;
+    const scaleY = (containerHeight * 0.9) / contentHeight;
+    const newZoom = Math.min(scaleX, scaleY, 1);
+    
+    setZoom(newZoom);
+    setPanX((containerWidth - contentWidth * newZoom) / 2);
+    setPanY((containerHeight - contentHeight * newZoom) / 2);
   };
 
   // Mouse handlers for panning
@@ -284,6 +302,9 @@ const InvestorTreeChart = ({ investors, isCollapsed }: InvestorTreeChartProps) =
             <Button variant="outline" size="sm" onClick={resetView}>
               <RotateCcw className="w-4 h-4" />
             </Button>
+            <Button variant="outline" size="sm" onClick={autoFit}>
+              Fit
+            </Button>
           </div>
         </div>
       </CardHeader>
@@ -373,8 +394,24 @@ const InvestorTreeChart = ({ investors, isCollapsed }: InvestorTreeChartProps) =
                     selectedInvestor.netProfit > 0 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {selectedInvestor.netProfit > 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
-                    ₹{Math.abs(selectedInvestor.netProfit).toLocaleString()}
+                    {selectedInvestor.netProfit > 0 ? '+' : '-'}₹{Math.abs(selectedInvestor.netProfit).toLocaleString()}
                   </div>
+                </div>
+                
+                <div>
+                  <div className="text-sm text-muted-foreground">ROI (Return on Investment)</div>
+                  <div className={`font-medium ${
+                    selectedInvestor.netProfit > 0 ? 'text-green-600' : 'text-red-600'
+                  }`}>
+                    {((selectedInvestor.netProfit / selectedInvestor.investment) * 100).toFixed(1)}%
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="text-sm text-muted-foreground">Status</div>
+                  <Badge variant={selectedInvestor.netProfit > 0 ? "default" : "destructive"}>
+                    {selectedInvestor.netProfit > 0 ? "Profitable" : "Loss"}
+                  </Badge>
                 </div>
                 
                 <div>

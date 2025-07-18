@@ -134,7 +134,7 @@ const PonziSimulation = () => {
       
       const growthRate = recentInvestors / Math.max(1, simulation.investors.length * 0.3);
       
-      if (simulation.currentRound > 5 && (growthRate < 0.1 || Math.random() < 0.15)) {
+      if (simulation.currentRound > 8 && simulation.investors.length >= 50 && (growthRate < 0.1 || Math.random() < 0.15)) {
         setSimulation(prev => ({ ...prev, isCollapsed: true }));
         setAutoRunning(false);
       }
