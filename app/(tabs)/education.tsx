@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { BookOpen, Lightbulb, ExternalLink, Building2, Shield, GraduationCap } from 'lucide-react-native';
 
 const EducationScreen = () => {
   const [selectedTab, setSelectedTab] = useState<'glossary' | 'tips' | 'resources'>('glossary');
@@ -34,32 +34,32 @@ const EducationScreen = () => {
     {
       title: 'Verify Before You Invest',
       description: 'Always check if the company is registered with SEBI, RBI, or other regulatory bodies.',
-      icon: 'verified',
+      icon: Shield,
     },
     {
       title: 'Too Good to Be True',
       description: 'If returns seem unrealistically high with no risk, it\'s likely a scam.',
-      icon: 'warning',
+      icon: '⚠️',
     },
     {
       title: 'Pressure Tactics',
       description: 'Legitimate investments don\'t require immediate decisions or high-pressure sales.',
-      icon: 'timer',
+      icon: '⏰',
     },
     {
       title: 'Transparency Matters',
       description: 'Real businesses provide clear information about their operations and financials.',
-      icon: 'visibility',
+      icon: '👁️',
     },
     {
       title: 'Recruitment Focus',
       description: 'Be wary of schemes that emphasize recruiting others over actual products or services.',
-      icon: 'people',
+      icon: '👥',
     },
     {
       title: 'Documentation',
       description: 'Always get proper documentation and receipts for any investment.',
-      icon: 'description',
+      icon: '📄',
     },
   ];
 
@@ -68,25 +68,25 @@ const EducationScreen = () => {
       title: 'SEBI Investor Portal',
       description: 'Securities and Exchange Board of India - Official investor protection portal',
       url: 'https://www.sebi.gov.in',
-      icon: 'account-balance',
+      icon: Building2,
     },
     {
       title: 'RBI Consumer Education',
       description: 'Reserve Bank of India - Banking and financial awareness',
       url: 'https://www.rbi.org.in',
-      icon: 'account-balance',
+      icon: Building2,
     },
     {
       title: 'Cybercrime Reporting',
       description: 'Report financial fraud and cybercrime to authorities',
       url: 'https://cybercrime.gov.in',
-      icon: 'security',
+      icon: Shield,
     },
     {
       title: 'PFMS Scholarship',
       description: 'Public Financial Management System - Government schemes verification',
       url: 'https://pfms.nic.in',
-      icon: 'school',
+      icon: GraduationCap,
     },
   ];
 
@@ -101,7 +101,7 @@ const EducationScreen = () => {
           <Text style={styles.glossaryTerm}>{item.term}</Text>
           <Text style={styles.glossaryDefinition}>{item.definition}</Text>
           <View style={styles.exampleContainer}>
-            <MaterialIcons name="lightbulb" size={16} color="#ffd93d" />
+            <Text style={styles.exampleIcon}>💡</Text>
             <Text style={styles.glossaryExample}>{item.example}</Text>
           </View>
         </View>
@@ -114,7 +114,11 @@ const EducationScreen = () => {
       {tips.map((tip, index) => (
         <View key={index} style={styles.tipCard}>
           <View style={styles.tipHeader}>
-            <MaterialIcons name={tip.icon as any} size={24} color="#4ecdc4" />
+            {typeof tip.icon === 'string' ? (
+              <Text style={styles.tipIconText}>{tip.icon}</Text>
+            ) : (
+              <tip.icon size={24} color="#4ecdc4" />
+            )}
             <Text style={styles.tipTitle}>{tip.title}</Text>
           </View>
           <Text style={styles.tipDescription}>{tip.description}</Text>
@@ -133,12 +137,12 @@ const EducationScreen = () => {
           activeOpacity={0.8}
         >
           <View style={styles.resourceHeader}>
-            <MaterialIcons name={resource.icon as any} size={24} color="#45b7d1" />
+            <resource.icon size={24} color="#45b7d1" />
             <View style={styles.resourceContent}>
               <Text style={styles.resourceTitle}>{resource.title}</Text>
               <Text style={styles.resourceDescription}>{resource.description}</Text>
             </View>
-            <MaterialIcons name="open-in-new" size={20} color="#b8b8b8" />
+            <ExternalLink size={20} color="#b8b8b8" />
           </View>
         </TouchableOpacity>
       ))}
@@ -159,11 +163,7 @@ const EducationScreen = () => {
             style={[styles.tab, selectedTab === 'glossary' && styles.activeTab]}
             onPress={() => setSelectedTab('glossary')}
           >
-            <MaterialIcons 
-              name="menu-book" 
-              size={20} 
-              color={selectedTab === 'glossary' ? 'white' : '#b8b8b8'} 
-            />
+            <BookOpen size={20} color={selectedTab === 'glossary' ? 'white' : '#b8b8b8'} />
             <Text style={[
               styles.tabText,
               selectedTab === 'glossary' && styles.activeTabText
@@ -176,11 +176,7 @@ const EducationScreen = () => {
             style={[styles.tab, selectedTab === 'tips' && styles.activeTab]}
             onPress={() => setSelectedTab('tips')}
           >
-            <MaterialIcons 
-              name="lightbulb" 
-              size={20} 
-              color={selectedTab === 'tips' ? 'white' : '#b8b8b8'} 
-            />
+            <Lightbulb size={20} color={selectedTab === 'tips' ? 'white' : '#b8b8b8'} />
             <Text style={[
               styles.tabText,
               selectedTab === 'tips' && styles.activeTabText
@@ -193,11 +189,7 @@ const EducationScreen = () => {
             style={[styles.tab, selectedTab === 'resources' && styles.activeTab]}
             onPress={() => setSelectedTab('resources')}
           >
-            <MaterialIcons 
-              name="link" 
-              size={20} 
-              color={selectedTab === 'resources' ? 'white' : '#b8b8b8'} 
-            />
+            <ExternalLink size={20} color={selectedTab === 'resources' ? 'white' : '#b8b8b8'} />
             <Text style={[
               styles.tabText,
               selectedTab === 'resources' && styles.activeTabText
@@ -300,11 +292,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
   },
+  exampleIcon: {
+    fontSize: 16,
+    marginRight: 8,
+  },
   glossaryExample: {
     fontSize: 13,
     color: '#b8b8b8',
     fontStyle: 'italic',
-    marginLeft: 8,
     flex: 1,
     lineHeight: 18,
   },
@@ -318,6 +313,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 12,
+  },
+  tipIconText: {
+    fontSize: 24,
+    marginRight: 12,
   },
   tipTitle: {
     fontSize: 16,

@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Home, Brain, BookOpen, User } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
@@ -19,14 +19,13 @@ export default function TabLayout() {
           fontSize: 12,
           fontWeight: '600',
         },
-      }}
-    >
+      }}>
       <Tabs.Screen
         name="home"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="home" size={size} color={color} />
+          tabBarIcon: ({ size, color }) => (
+            <Home size={size} color={color} />
           ),
         }}
       />
@@ -34,8 +33,8 @@ export default function TabLayout() {
         name="simulator"
         options={{
           title: 'Simulator',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="psychology" size={size} color={color} />
+          tabBarIcon: ({ size, color }) => (
+            <Brain size={size} color={color} />
           ),
         }}
       />
@@ -43,8 +42,8 @@ export default function TabLayout() {
         name="education"
         options={{
           title: 'Learn',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="school" size={size} color={color} />
+          tabBarIcon: ({ size, color }) => (
+            <BookOpen size={size} color={color} />
           ),
         }}
       />
@@ -52,8 +51,8 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="person" size={size} color={color} />
+          tabBarIcon: ({ size, color }) => (
+            <User size={size} color={color} />
           ),
         }}
       />

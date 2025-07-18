@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import Svg, { Circle, Line, Text as SvgText } from 'react-native-svg';
 import { Investor } from '../store/ponziStore';
 
@@ -160,7 +159,7 @@ export const PonziTreeVisualization: React.FC<PonziTreeVisualizationProps> = ({
   if (!tree) {
     return (
       <View style={styles.emptyContainer}>
-        <MaterialIcons name="account-tree" size={48} color="#666" />
+        <Text style={styles.emptyIcon}>🌳</Text>
         <Text style={styles.emptyText}>No investors to display</Text>
       </View>
     );
@@ -287,6 +286,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 40,
+  },
+  emptyIcon: {
+    fontSize: 48,
   },
   emptyText: {
     color: '#666',

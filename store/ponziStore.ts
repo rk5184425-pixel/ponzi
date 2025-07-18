@@ -134,36 +134,3 @@ export const usePonziStore = create<PonziState & PonziActions>((set, get) => ({
     set({ investmentAmount: amount });
   }
 }));
-
-// Auto-run effect (would be implemented in a React component)
-let autoRunInterval: NodeJS.Timeout | null = null;
-
-export const startAutoRun = () => {
-  const { autoRun, isCollapsed, addInvestors } = usePonziStore.getState();
-  
-  if (autoRunInterval) {
-    clearInterval(autoRunInterval);
-  }
-
-  if (autoRun && !isCollapsed) {
-    autoRunInterval = setInterval(() => {
-      const state = usePonziStore.getState();
-      if (state.autoRun && !state.isCollapsed) {
-        const newCount = Math.max(1, Math.floor(Math.random() * 3) + 1);
-        addInvestors(newCount);
-      } else {
-        if (autoRunInterval) {
-          clearInterval(autoRunInterval);
-          autoRunInterval = null;
-        }
-      }
-    }, 2000);
-  }
-};
-
-export const stopAutoRun = () => {
-  if (autoRunInterval) {
-    clearInterval(autoRunInterval);
-    autoRunInterval = null;
-  }
-};

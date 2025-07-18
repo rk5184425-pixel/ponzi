@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
+import { ArrowLeft, BookOpen, Play, Clock, Wrench } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -192,7 +192,7 @@ const StoryMode = () => {
               style={styles.backButton}
               onPress={() => setSelectedStory(null)}
             >
-              <MaterialIcons name="arrow-back" size={24} color="white" />
+              <ArrowLeft size={24} color="white" />
             </TouchableOpacity>
             <View style={styles.storyInfo}>
               <Text style={styles.storyTitle}>{selectedStory.title}</Text>
@@ -245,7 +245,7 @@ const StoryMode = () => {
 
             {/* Educational Note */}
             <View style={styles.educationalNote}>
-              <MaterialIcons name="lightbulb" size={20} color="#ffd93d" />
+              <Text style={styles.educationalIcon}>💡</Text>
               <Text style={styles.educationalText}>
                 Think carefully about each choice. In real life, these decisions can have serious financial consequences.
               </Text>
@@ -265,7 +265,7 @@ const StoryMode = () => {
             style={styles.backButton}
             onPress={() => router.back()}
           >
-            <MaterialIcons name="arrow-back" size={24} color="white" />
+            <ArrowLeft size={24} color="white" />
           </TouchableOpacity>
           <Text style={styles.title}>Story Mode</Text>
           <View style={styles.placeholder} />
@@ -274,7 +274,7 @@ const StoryMode = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* Introduction */}
           <View style={styles.introContainer}>
-            <MaterialIcons name="menu-book" size={48} color="#4ecdc4" />
+            <BookOpen size={48} color="#4ecdc4" />
             <Text style={styles.introTitle}>Learn Through Real Stories</Text>
             <Text style={styles.introDescription}>
               Experience real-world fraud cases through interactive storytelling. 
@@ -299,7 +299,7 @@ const StoryMode = () => {
                       {story.description}
                     </Text>
                   </View>
-                  <MaterialIcons name="play-arrow" size={32} color="#4ecdc4" />
+                  <Play size={32} color="#4ecdc4" />
                 </View>
 
                 <View style={styles.storyCardFooter}>
@@ -311,7 +311,7 @@ const StoryMode = () => {
                       <Text style={styles.difficultyText}>{story.difficulty}</Text>
                     </View>
                     <View style={styles.timeContainer}>
-                      <MaterialIcons name="schedule" size={16} color="#b8b8b8" />
+                      <Clock size={16} color="#b8b8b8" />
                       <Text style={styles.timeText}>{story.estimatedTime}</Text>
                     </View>
                   </View>
@@ -327,7 +327,7 @@ const StoryMode = () => {
           <View style={styles.comingSoonContainer}>
             <Text style={styles.sectionTitle}>Coming Soon</Text>
             <View style={styles.comingSoonCard}>
-              <MaterialIcons name="construction" size={32} color="#ffd93d" />
+              <Wrench size={32} color="#ffd93d" />
               <Text style={styles.comingSoonTitle}>More Stories</Text>
               <Text style={styles.comingSoonDescription}>
                 We're working on more interactive stories covering different types of financial fraud:
@@ -610,12 +610,15 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 30,
   },
+  educationalIcon: {
+    fontSize: 20,
+    marginRight: 10,
+  },
   educationalText: {
     flex: 1,
     fontSize: 14,
     color: '#b8b8b8',
     lineHeight: 20,
-    marginLeft: 10,
   },
 });
 

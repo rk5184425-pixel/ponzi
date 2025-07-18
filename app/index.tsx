@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
   interpolate
 } from 'react-native-reanimated';
-import { MaterialIcons } from '@expo/vector-icons';
+import { AlertTriangle, ArrowRight } from 'lucide-react-native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -47,7 +47,7 @@ export default function WelcomeScreen() {
     >
       <Animated.View style={[styles.content, fadeStyle]}>
         <Animated.View style={[styles.logoContainer, pulseStyle]}>
-          <MaterialIcons name="warning" size={80} color="#ff6b6b" />
+          <AlertTriangle size={80} color="#ff6b6b" />
           <Text style={styles.title}>PonziXposed</Text>
           <Text style={styles.subtitle}>The Fraud Unfolded</Text>
         </Animated.View>
@@ -61,15 +61,15 @@ export default function WelcomeScreen() {
 
         <View style={styles.featuresContainer}>
           <View style={styles.feature}>
-            <MaterialIcons name="psychology" size={24} color="#4ecdc4" />
+            <Text style={styles.featureIcon}>🧠</Text>
             <Text style={styles.featureText}>Interactive Simulation</Text>
           </View>
           <View style={styles.feature}>
-            <MaterialIcons name="visibility" size={24} color="#45b7d1" />
+            <Text style={styles.featureIcon}>👁️</Text>
             <Text style={styles.featureText}>Visual Learning</Text>
           </View>
           <View style={styles.feature}>
-            <MaterialIcons name="security" size={24} color="#96ceb4" />
+            <Text style={styles.featureIcon}>🛡️</Text>
             <Text style={styles.featureText}>Fraud Protection</Text>
           </View>
         </View>
@@ -84,7 +84,7 @@ export default function WelcomeScreen() {
             style={styles.buttonGradient}
           >
             <Text style={styles.buttonText}>Start Learning</Text>
-            <MaterialIcons name="arrow-forward" size={24} color="white" />
+            <ArrowRight size={24} color="white" />
           </LinearGradient>
         </TouchableOpacity>
       </Animated.View>
@@ -149,10 +149,13 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     paddingHorizontal: 20,
   },
+  featureIcon: {
+    fontSize: 24,
+    marginRight: 15,
+  },
   featureText: {
     fontSize: 16,
     color: 'white',
-    marginLeft: 15,
     fontWeight: '500',
   },
   startButton: {

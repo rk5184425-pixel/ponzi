@@ -56,6 +56,3 @@ web-build/
 
 # Local Netlify folder
 .netlify
-
-# Typescript
-*.tsbuildinfo

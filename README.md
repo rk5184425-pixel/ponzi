@@ -43,9 +43,9 @@ In today's digital age, millions fall prey to fraudulent investment schemes — 
 
 - **Frontend**: React Native + Expo
 - **State Management**: Zustand
-- **Charts & Visualizations**: react-native-svg, victory-native
-- **Animations**: React Native Reanimated, Lottie
-- **UI Components**: React Native Paper
+- **Charts & Visualizations**: react-native-svg
+- **Animations**: React Native Reanimated
+- **Icons**: Lucide React Native
 - **Navigation**: Expo Router
 
 ## 🚀 Getting Started
@@ -99,10 +99,11 @@ app/
 ├── story.tsx         # Interactive story mode
 └── index.tsx         # Welcome screen
 
-src/
-├── components/       # Reusable UI components
-├── store/           # Zustand state management
-└── theme/           # App theming and colors
+store/
+├── ponziStore.ts     # Zustand state management
+
+components/
+├── PonziTreeVisualization.tsx # Tree visualization component
 ```
 
 ## 🎮 How to Play

@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { User, Trophy, Flag, BookOpen, Brain, Award, Bell, Globe, HelpCircle, Info, LogOut } from 'lucide-react-native';
 
 const ProfileScreen = () => {
   const userStats = {
@@ -16,14 +16,14 @@ const ProfileScreen = () => {
   };
 
   const badges = [
-    { name: 'Red Flag Spotter', icon: 'flag', color: '#ff6b6b', earned: true },
-    { name: 'Collapse Survivor', icon: 'security', color: '#4ecdc4', earned: true },
-    { name: 'Financial Detective', icon: 'search', color: '#45b7d1', earned: true },
-    { name: 'Story Master', icon: 'menu-book', color: '#96ceb4', earned: true },
-    { name: 'Scheme Buster', icon: 'gavel', color: '#ffd93d', earned: true },
-    { name: 'Fraud Fighter', icon: 'shield', color: '#ff9ff3', earned: true },
-    { name: 'Awareness Champion', icon: 'campaign', color: '#54a0ff', earned: false },
-    { name: 'Master Educator', icon: 'school', color: '#5f27cd', earned: false },
+    { name: 'Red Flag Spotter', icon: Flag, color: '#ff6b6b', earned: true },
+    { name: 'Collapse Survivor', icon: Shield, color: '#4ecdc4', earned: true },
+    { name: 'Financial Detective', icon: '🔍', color: '#45b7d1', earned: true },
+    { name: 'Story Master', icon: BookOpen, color: '#96ceb4', earned: true },
+    { name: 'Scheme Buster', icon: '⚖️', color: '#ffd93d', earned: true },
+    { name: 'Fraud Fighter', icon: '🛡️', color: '#ff9ff3', earned: true },
+    { name: 'Awareness Champion', icon: '📢', color: '#54a0ff', earned: false },
+    { name: 'Master Educator', icon: GraduationCap, color: '#5f27cd', earned: false },
   ];
 
   const achievements = [
@@ -56,7 +56,7 @@ const ProfileScreen = () => {
                 colors={['#ff6b6b', '#4ecdc4']}
                 style={styles.avatar}
               >
-                <MaterialIcons name="person" size={40} color="white" />
+                <User size={40} color="white" />
               </LinearGradient>
             </View>
             <Text style={styles.userName}>Fraud Fighter</Text>
@@ -91,22 +91,22 @@ const ProfileScreen = () => {
             <Text style={styles.sectionTitle}>Your Stats</Text>
             <View style={styles.statsGrid}>
               <View style={styles.statCard}>
-                <MaterialIcons name="psychology" size={24} color="#ff6b6b" />
+                <Brain size={24} color="#ff6b6b" />
                 <Text style={styles.statValue}>{userStats.schemesExposed}</Text>
                 <Text style={styles.statLabel}>Schemes Exposed</Text>
               </View>
               <View style={styles.statCard}>
-                <MaterialIcons name="flag" size={24} color="#4ecdc4" />
+                <Flag size={24} color="#4ecdc4" />
                 <Text style={styles.statValue}>{userStats.redFlagsSpotted}</Text>
                 <Text style={styles.statLabel}>Red Flags Spotted</Text>
               </View>
               <View style={styles.statCard}>
-                <MaterialIcons name="menu-book" size={24} color="#45b7d1" />
+                <BookOpen size={24} color="#45b7d1" />
                 <Text style={styles.statValue}>{userStats.storiesCompleted}</Text>
                 <Text style={styles.statLabel}>Stories Completed</Text>
               </View>
               <View style={styles.statCard}>
-                <MaterialIcons name="emoji-events" size={24} color="#ffd93d" />
+                <Trophy size={24} color="#ffd93d" />
                 <Text style={styles.statValue}>{userStats.badgesEarned}</Text>
                 <Text style={styles.statLabel}>Badges Earned</Text>
               </View>
@@ -125,11 +125,13 @@ const ProfileScreen = () => {
                     !badge.earned && styles.badgeCardLocked
                   ]}
                 >
-                  <MaterialIcons 
-                    name={badge.icon as any} 
-                    size={24} 
-                    color={badge.earned ? badge.color : '#666'} 
-                  />
+                  {typeof badge.icon === 'string' ? (
+                    <Text style={[styles.badgeIconText, { color: badge.earned ? badge.color : '#666' }]}>
+                      {badge.icon}
+                    </Text>
+                  ) : (
+                    <badge.icon size={24} color={badge.earned ? badge.color : '#666'} />
+                  )}
                   <Text style={[
                     styles.badgeName,
                     !badge.earned && styles.badgeNameLocked
@@ -146,7 +148,7 @@ const ProfileScreen = () => {
             <Text style={styles.sectionTitle}>Recent Achievements</Text>
             {achievements.map((achievement, index) => (
               <View key={index} style={styles.achievementCard}>
-                <MaterialIcons name="emoji-events" size={24} color="#ffd93d" />
+                <Trophy size={24} color="#ffd93d" />
                 <View style={styles.achievementContent}>
                   <Text style={styles.achievementTitle}>{achievement.title}</Text>
                   <Text style={styles.achievementDescription}>
@@ -163,34 +165,34 @@ const ProfileScreen = () => {
             <Text style={styles.sectionTitle}>Settings</Text>
             
             <TouchableOpacity style={styles.settingItem}>
-              <MaterialIcons name="notifications" size={24} color="#4ecdc4" />
+              <Bell size={24} color="#4ecdc4" />
               <Text style={styles.settingText}>Notifications</Text>
-              <MaterialIcons name="chevron-right" size={24} color="#b8b8b8" />
+              <Text style={styles.chevron}>›</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.settingItem}>
-              <MaterialIcons name="language" size={24} color="#45b7d1" />
+              <Globe size={24} color="#45b7d1" />
               <Text style={styles.settingText}>Language</Text>
-              <MaterialIcons name="chevron-right" size={24} color="#b8b8b8" />
+              <Text style={styles.chevron}>›</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.settingItem}>
-              <MaterialIcons name="help" size={24} color="#96ceb4" />
+              <HelpCircle size={24} color="#96ceb4" />
               <Text style={styles.settingText}>Help & Support</Text>
-              <MaterialIcons name="chevron-right" size={24} color="#b8b8b8" />
+              <Text style={styles.chevron}>›</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.settingItem}>
-              <MaterialIcons name="info" size={24} color="#ffd93d" />
+              <Info size={24} color="#ffd93d" />
               <Text style={styles.settingText}>About</Text>
-              <MaterialIcons name="chevron-right" size={24} color="#b8b8b8" />
+              <Text style={styles.chevron}>›</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
               style={[styles.settingItem, styles.logoutItem]}
               onPress={handleLogout}
             >
-              <MaterialIcons name="logout" size={24} color="#ff6b6b" />
+              <LogOut size={24} color="#ff6b6b" />
               <Text style={[styles.settingText, styles.logoutText]}>Logout</Text>
             </TouchableOpacity>
           </View>
@@ -328,6 +330,9 @@ const styles = StyleSheet.create({
   badgeCardLocked: {
     opacity: 0.5,
   },
+  badgeIconText: {
+    fontSize: 24,
+  },
   badgeName: {
     fontSize: 12,
     color: 'white',
@@ -388,6 +393,10 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: 15,
     fontWeight: '500',
+  },
+  chevron: {
+    fontSize: 24,
+    color: '#b8b8b8',
   },
   logoutItem: {
     marginTop: 10,

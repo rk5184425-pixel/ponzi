@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
-import { PonziTreeVisualization } from '../../src/components/PonziTreeVisualization';
-import { usePonziStore } from '../../src/store/ponziStore';
+import { PonziTreeVisualization } from '../../components/PonziTreeVisualization';
+import { usePonziStore } from '../../store/ponziStore';
+import { Users, DollarSign, TrendingDown, BarChart3, UserPlus, Play, Pause, RotateCcw } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -116,22 +116,22 @@ const SimulatorScreen = () => {
             <Text style={styles.sectionTitle}>Simulation Status</Text>
             <View style={styles.statsGrid}>
               <View style={styles.statCard}>
-                <MaterialIcons name="people" size={24} color="#4ecdc4" />
+                <Users size={24} color="#4ecdc4" />
                 <Text style={styles.statValue}>{investors.length}</Text>
                 <Text style={styles.statLabel}>Total Investors</Text>
               </View>
               <View style={styles.statCard}>
-                <MaterialIcons name="attach-money" size={24} color="#45b7d1" />
+                <DollarSign size={24} color="#45b7d1" />
                 <Text style={styles.statValue}>₹{totalInvested.toLocaleString()}</Text>
                 <Text style={styles.statLabel}>Total Invested</Text>
               </View>
               <View style={styles.statCard}>
-                <MaterialIcons name="trending-down" size={24} color="#ff6b6b" />
+                <TrendingDown size={24} color="#ff6b6b" />
                 <Text style={styles.statValue}>₹{deficit.toLocaleString()}</Text>
                 <Text style={styles.statLabel}>Money Owed</Text>
               </View>
               <View style={styles.statCard}>
-                <MaterialIcons name="timeline" size={24} color="#96ceb4" />
+                <BarChart3 size={24} color="#96ceb4" />
                 <Text style={styles.statValue}>{currentRound}</Text>
                 <Text style={styles.statLabel}>Round</Text>
               </View>
@@ -148,7 +148,7 @@ const SimulatorScreen = () => {
                   onPress={() => handleAddInvestors(1)}
                   disabled={isCollapsed}
                 >
-                  <MaterialIcons name="person-add" size={20} color="white" />
+                  <UserPlus size={20} color="white" />
                   <Text style={styles.controlButtonText}>Add 1 Investor</Text>
                 </TouchableOpacity>
                 
@@ -157,7 +157,7 @@ const SimulatorScreen = () => {
                   onPress={() => handleAddInvestors(3)}
                   disabled={isCollapsed}
                 >
-                  <MaterialIcons name="group-add" size={20} color="white" />
+                  <Users size={20} color="white" />
                   <Text style={styles.controlButtonText}>Add 3 Investors</Text>
                 </TouchableOpacity>
 
@@ -166,7 +166,7 @@ const SimulatorScreen = () => {
                   onPress={() => setAutoRun(!autoRun)}
                   disabled={isCollapsed}
                 >
-                  <MaterialIcons name={autoRun ? "pause" : "play-arrow"} size={20} color="white" />
+                  {autoRun ? <Pause size={20} color="white" /> : <Play size={20} color="white" />}
                   <Text style={styles.controlButtonText}>
                     {autoRun ? 'Stop Auto' : 'Auto Run'}
                   </Text>
@@ -176,7 +176,7 @@ const SimulatorScreen = () => {
                   style={[styles.controlButton, { backgroundColor: '#ff6b6b' }]}
                   onPress={handleReset}
                 >
-                  <MaterialIcons name="refresh" size={20} color="white" />
+                  <RotateCcw size={20} color="white" />
                   <Text style={styles.controlButtonText}>Reset</Text>
                 </TouchableOpacity>
               </View>
@@ -192,7 +192,7 @@ const SimulatorScreen = () => {
           {/* Collapse Alert */}
           {isCollapsed && (
             <Animated.View style={[styles.collapseAlert, collapseStyle]}>
-              <MaterialIcons name="warning" size={32} color="#ff6b6b" />
+              <Text style={styles.collapseIcon}>⚠️</Text>
               <Text style={styles.collapseTitle}>SCHEME COLLAPSED!</Text>
               <Text style={styles.collapseText}>
                 • New investors stopped joining{'\n'}
@@ -208,7 +208,7 @@ const SimulatorScreen = () => {
           <View style={styles.insightsContainer}>
             <Text style={styles.sectionTitle}>Key Insights</Text>
             <View style={styles.insightCard}>
-              <MaterialIcons name="trending-up" size={24} color="#ffd93d" />
+              <Text style={styles.insightIcon}>📈</Text>
               <View style={styles.insightContent}>
                 <Text style={styles.insightTitle}>Unsustainable Growth</Text>
                 <Text style={styles.insightText}>
@@ -217,7 +217,7 @@ const SimulatorScreen = () => {
               </View>
             </View>
             <View style={styles.insightCard}>
-              <MaterialIcons name="people" size={24} color="#ff6b6b" />
+              <Text style={styles.insightIcon}>👥</Text>
               <View style={styles.insightContent}>
                 <Text style={styles.insightTitle}>Most People Lose</Text>
                 <Text style={styles.insightText}>
@@ -226,7 +226,7 @@ const SimulatorScreen = () => {
               </View>
             </View>
             <View style={styles.insightCard}>
-              <MaterialIcons name="flash-on" size={24} color="#4ecdc4" />
+              <Text style={styles.insightIcon}>⚡</Text>
               <View style={styles.insightContent}>
                 <Text style={styles.insightTitle}>Inevitable Collapse</Text>
                 <Text style={styles.insightText}>
@@ -374,6 +374,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 30,
   },
+  collapseIcon: {
+    fontSize: 32,
+  },
   collapseTitle: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -399,9 +402,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginBottom: 15,
   },
+  insightIcon: {
+    fontSize: 24,
+    marginRight: 15,
+  },
   insightContent: {
     flex: 1,
-    marginLeft: 15,
   },
   insightTitle: {
     fontSize: 16,

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Brain, Flag, BookOpen, GraduationCap, Bell, Eye, Shield, TrendingUp } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -13,7 +13,7 @@ const HomeScreen = () => {
       id: 1,
       title: 'Ponzi Simulator',
       description: 'Experience how Ponzi schemes work from the inside',
-      icon: 'psychology',
+      icon: Brain,
       color: '#ff6b6b',
       route: '/simulator',
     },
@@ -21,7 +21,7 @@ const HomeScreen = () => {
       id: 2,
       title: 'Red Flag Game',
       description: 'Test your ability to spot fraud indicators',
-      icon: 'flag',
+      icon: Flag,
       color: '#4ecdc4',
       route: '/redflags',
     },
@@ -29,7 +29,7 @@ const HomeScreen = () => {
       id: 3,
       title: 'Story Mode',
       description: 'Learn through real-world case studies',
-      icon: 'menu-book',
+      icon: BookOpen,
       color: '#45b7d1',
       route: '/story',
     },
@@ -37,16 +37,16 @@ const HomeScreen = () => {
       id: 4,
       title: 'Education Center',
       description: 'Comprehensive fraud awareness resources',
-      icon: 'school',
+      icon: GraduationCap,
       color: '#96ceb4',
       route: '/(tabs)/education',
     },
   ];
 
   const stats = [
-    { label: 'Schemes Exposed', value: '50+', icon: 'visibility' },
-    { label: 'Users Protected', value: '10K+', icon: 'security' },
-    { label: 'Success Rate', value: '95%', icon: 'trending-up' },
+    { label: 'Schemes Exposed', value: '50+', icon: Eye },
+    { label: 'Users Protected', value: '10K+', icon: Shield },
+    { label: 'Success Rate', value: '95%', icon: TrendingUp },
   ];
 
   return (
@@ -60,7 +60,7 @@ const HomeScreen = () => {
               <Text style={styles.subtitle}>Ready to expose some fraud?</Text>
             </View>
             <TouchableOpacity style={styles.notificationButton}>
-              <MaterialIcons name="notifications" size={24} color="white" />
+              <Bell size={24} color="white" />
             </TouchableOpacity>
           </View>
 
@@ -70,7 +70,7 @@ const HomeScreen = () => {
             <View style={styles.statsRow}>
               {stats.map((stat, index) => (
                 <View key={index} style={styles.statCard}>
-                  <MaterialIcons name={stat.icon as any} size={24} color="#4ecdc4" />
+                  <stat.icon size={24} color="#4ecdc4" />
                   <Text style={styles.statValue}>{stat.value}</Text>
                   <Text style={styles.statLabel}>{stat.label}</Text>
                 </View>
@@ -93,11 +93,7 @@ const HomeScreen = () => {
                     colors={[feature.color, `${feature.color}CC`]}
                     style={styles.featureGradient}
                   >
-                    <MaterialIcons 
-                      name={feature.icon as any} 
-                      size={32} 
-                      color="white" 
-                    />
+                    <feature.icon size={32} color="white" />
                     <Text style={styles.featureTitle}>{feature.title}</Text>
                     <Text style={styles.featureDescription}>
                       {feature.description}
@@ -112,7 +108,7 @@ const HomeScreen = () => {
           <View style={styles.tipsContainer}>
             <Text style={styles.sectionTitle}>Daily Tip</Text>
             <View style={styles.tipCard}>
-              <MaterialIcons name="lightbulb" size={24} color="#ffd93d" />
+              <Text style={styles.tipIcon}>💡</Text>
               <View style={styles.tipContent}>
                 <Text style={styles.tipTitle}>Red Flag Alert!</Text>
                 <Text style={styles.tipText}>
@@ -242,9 +238,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
   },
+  tipIcon: {
+    fontSize: 24,
+    marginRight: 15,
+  },
   tipContent: {
     flex: 1,
-    marginLeft: 15,
   },
   tipTitle: {
     fontSize: 16,

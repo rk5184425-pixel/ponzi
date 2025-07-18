@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import Animated, { 
@@ -11,6 +10,7 @@ import Animated, {
   withSequence,
   withSpring
 } from 'react-native-reanimated';
+import { ArrowLeft, Timer, Flag, CheckCircle, Trophy, Frown, RotateCcw, GraduationCap } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -193,11 +193,11 @@ const RedFlagsGame = () => {
         <SafeAreaView style={styles.safeArea}>
           <View style={styles.finishedContainer}>
             <Animated.View style={[styles.resultCard, scaleStyle]}>
-              <MaterialIcons 
-                name={isGoodScore ? "emoji-events" : "sentiment-dissatisfied"} 
-                size={80} 
-                color={isGoodScore ? "#ffd93d" : "#ff6b6b"} 
-              />
+              {isGoodScore ? (
+                <Trophy size={80} color="#ffd93d" />
+              ) : (
+                <Frown size={80} color="#ff6b6b" />
+              )}
               <Text style={styles.resultTitle}>
                 {isGoodScore ? "Excellent!" : "Keep Learning!"}
               </Text>
@@ -216,7 +216,7 @@ const RedFlagsGame = () => {
                   style={[styles.resultButton, { backgroundColor: '#4ecdc4' }]}
                   onPress={resetGame}
                 >
-                  <MaterialIcons name="refresh" size={20} color="white" />
+                  <RotateCcw size={20} color="white" />
                   <Text style={styles.resultButtonText}>Play Again</Text>
                 </TouchableOpacity>
                 
@@ -224,7 +224,7 @@ const RedFlagsGame = () => {
                   style={[styles.resultButton, { backgroundColor: '#45b7d1' }]}
                   onPress={() => router.push('/(tabs)/education')}
                 >
-                  <MaterialIcons name="school" size={20} color="white" />
+                  <GraduationCap size={20} color="white" />
                   <Text style={styles.resultButtonText}>Learn More</Text>
                 </TouchableOpacity>
               </View>
@@ -244,7 +244,7 @@ const RedFlagsGame = () => {
             style={styles.backButton}
             onPress={() => router.back()}
           >
-            <MaterialIcons name="arrow-back" size={24} color="white" />
+            <ArrowLeft size={24} color="white" />
           </TouchableOpacity>
           <Text style={styles.title}>Red Flag Detection</Text>
           <View style={styles.scoreContainer}>
@@ -264,7 +264,7 @@ const RedFlagsGame = () => {
 
         {/* Timer */}
         <View style={styles.timerContainer}>
-          <MaterialIcons name="timer" size={24} color="#ffd93d" />
+          <Timer size={24} color="#ffd93d" />
           <Text style={[
             styles.timerText,
             timeLeft <= 5 && styles.timerWarning
@@ -289,7 +289,7 @@ const RedFlagsGame = () => {
               onPress={() => handleAnswer(true)}
               activeOpacity={0.8}
             >
-              <MaterialIcons name="flag" size={32} color="white" />
+              <Flag size={32} color="white" />
               <Text style={styles.answerButtonText}>Red Flag!</Text>
             </TouchableOpacity>
 
@@ -298,7 +298,7 @@ const RedFlagsGame = () => {
               onPress={() => handleAnswer(false)}
               activeOpacity={0.8}
             >
-              <MaterialIcons name="check-circle" size={32} color="white" />
+              <CheckCircle size={32} color="white" />
               <Text style={styles.answerButtonText}>Looks Safe</Text>
             </TouchableOpacity>
           </View>
@@ -311,11 +311,11 @@ const RedFlagsGame = () => {
               styles.feedbackCard,
               selectedAnswer === currentFlag?.isRedFlag ? styles.correctFeedback : styles.incorrectFeedback
             ]}>
-              <MaterialIcons 
-                name={selectedAnswer === currentFlag?.isRedFlag ? "check-circle" : "cancel"} 
-                size={32} 
-                color="white" 
-              />
+              {selectedAnswer === currentFlag?.isRedFlag ? (
+                <CheckCircle size={32} color="white" />
+              ) : (
+                <Text style={styles.feedbackIcon}>❌</Text>
+              )}
               <Text style={styles.feedbackTitle}>
                 {selectedAnswer === currentFlag?.isRedFlag ? "Correct!" : 
                  selectedAnswer === null ? "Time's Up!" : "Incorrect"}
@@ -335,7 +335,7 @@ const RedFlagsGame = () => {
                   : "Next Question"
                 }
               </Text>
-              <MaterialIcons name="arrow-forward" size={20} color="white" />
+              <Text style={styles.nextButtonIcon}>→</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -485,6 +485,9 @@ const styles = StyleSheet.create({
     borderColor: '#ff6b6b',
     borderWidth: 1,
   },
+  feedbackIcon: {
+    fontSize: 32,
+  },
   feedbackTitle: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -511,6 +514,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginRight: 8,
+  },
+  nextButtonIcon: {
+    color: 'white',
+    fontSize: 20,
   },
   finishedContainer: {
     flex: 1,
