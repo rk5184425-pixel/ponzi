@@ -1,73 +1,158 @@
-# Welcome to your Lovable project
+# PonziXposed - The Fraud Unfolded
 
-## Project info
+**"Play the scam to spot the scam."**  
+Learn fraud. Stop fraud. Be financially fearless.
 
-**URL**: https://lovable.dev/projects/7765783a-a05c-4933-bd31-808dbf33d794
+## 🚀 About PonziXposed
 
-## How can I edit this code?
+PonziXposed is a React Native gamified mobile application that simulates the lifecycle of Ponzi schemes from different perspectives (Founder, Victim, Regulator). Through interactive gameplay, tree/graph-based simulation, and story-driven learning, users can see how these scams grow and collapse — and learn how to avoid them in real life.
 
-There are several ways of editing your application.
+## 🎯 Problem Statement
 
-**Use Lovable**
+In today's digital age, millions fall prey to fraudulent investment schemes — especially Ponzi and pyramid schemes that promise unrealistic returns. These scams often thrive due to low financial literacy, emotional manipulation, and the inability to visualize their exponential collapse.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7765783a-a05c-4933-bd31-808dbf33d794) and start prompting.
+## 📱 Key Features
 
-Changes made via Lovable will be committed automatically to this repo.
+### 🎮 Ponzi Scheme Simulator
+- Play as a scam founder, victim, or regulator
+- Recruit virtual investors and manage payouts
+- Visualize the inevitable collapse in real-time
+- Interactive tree visualization showing recruitment structure
 
-**Use your preferred IDE**
+### 🚩 Red Flag Detection Game
+- Time-based minigames to spot fraud indicators
+- Learn to identify terms like "guaranteed returns," "invite-only," etc.
+- Score-based system with educational feedback
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 📖 Story Mode
+- Real-life inspired, choice-based stories
+- Explore schemes like Bernie Madoff, GainBitcoin, SpeakAsia
+- Emotionally immersive learning experience
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 📚 Education Center
+- Comprehensive glossary: Ponzi vs. Pyramid vs. MLM
+- Tips on how to verify legitimate platforms
+- Links to SEBI, RBI, and cybercrime reporting portals
 
-Follow these steps:
+### 🏅 Gamification Elements
+- Progress tracking and experience points
+- Badges: "Red Flag Spotter", "Collapse Survivor", "Financial Detective"
+- Achievement system and leaderboards
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🛠 Tech Stack
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- **Frontend**: React Native + Expo
+- **State Management**: Zustand
+- **Charts & Visualizations**: react-native-svg, victory-native
+- **Animations**: React Native Reanimated, Lottie
+- **UI Components**: React Native Paper
+- **Navigation**: Expo Router
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🚀 Getting Started
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+- Expo CLI
+- iOS Simulator or Android Emulator (or physical device)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd ponzixposed
 ```
 
-**Edit a file directly in GitHub**
+2. Install dependencies:
+```bash
+npm install
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3. Start the development server:
+```bash
+npm start
+```
 
-**Use GitHub Codespaces**
+4. Run on your preferred platform:
+```bash
+# iOS
+npm run ios
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Android
+npm run android
 
-## What technologies are used for this project?
+# Web
+npm run web
+```
 
-This project is built with:
+## 📱 App Structure
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+app/
+├── (tabs)/           # Main tab navigation
+│   ├── home.tsx      # Dashboard with features overview
+│   ├── simulator.tsx # Ponzi scheme simulator
+│   ├── education.tsx # Learning resources
+│   └── profile.tsx   # User progress and settings
+├── redflags.tsx      # Red flag detection game
+├── story.tsx         # Interactive story mode
+└── index.tsx         # Welcome screen
 
-## How can I deploy this project?
+src/
+├── components/       # Reusable UI components
+├── store/           # Zustand state management
+└── theme/           # App theming and colors
+```
 
-Simply open [Lovable](https://lovable.dev/projects/7765783a-a05c-4933-bd31-808dbf33d794) and click on Share -> Publish.
+## 🎮 How to Play
 
-## Can I connect a custom domain to my Lovable project?
+### Simulator Mode
+1. Choose your role: Founder, Victim, or Regulator
+2. As a founder: Recruit investors and manage the scheme
+3. Watch the pyramid structure grow and eventually collapse
+4. Learn from the inevitable failure
 
-Yes, you can!
+### Red Flag Game
+1. Read investment pitches and scenarios
+2. Identify whether they contain red flags
+3. Get immediate feedback and explanations
+4. Improve your fraud detection skills
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Story Mode
+1. Experience real-world fraud cases
+2. Make choices as different characters
+3. See the consequences of your decisions
+4. Learn from historical scam cases
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 🌍 Social Impact
+
+- Promotes financial literacy through simulation
+- Helps users visually understand scam structures
+- Protects vulnerable populations from digital fraud
+- Scalable to vernacular languages for rural outreach
+- Potential for integration in school curriculums
+
+## 🔮 Future Scope
+
+- ML-based scam detector using user behavior
+- Expand to Crypto & MLM fraud simulations
+- Community story submissions
+- Partnership with government/banks for verified content
+- Multi-language support
+
+## 🤝 Contributing
+
+We welcome contributions! Please read our contributing guidelines and submit pull requests for any improvements.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 📞 Support
+
+For support, email support@ponzixposed.com or join our community discussions.
+
+---
+
+**Remember**: Real investments carry risk, and if something sounds too good to be true, it probably is. Stay informed, stay protected! 🛡️
