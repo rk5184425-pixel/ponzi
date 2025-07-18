@@ -17,6 +17,7 @@ import {
   Target,
   Zap
 } from "lucide-react";
+import InvestorTreeChart from "./InvestorTreeChart";
 
 interface Investor {
   id: number;
@@ -395,6 +396,14 @@ const PonziSimulation = () => {
               </CardContent>
             </Card>
           </div>
+        )}
+
+        {/* Investor Tree Chart */}
+        {gameStarted && (
+          <InvestorTreeChart 
+            investors={simulation.investors} 
+            isCollapsed={simulation.isCollapsed} 
+          />
         )}
 
         {/* Collapse Alert */}
